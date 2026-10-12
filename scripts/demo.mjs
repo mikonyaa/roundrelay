@@ -19,6 +19,8 @@ page.on("pageerror", (e) => errors.push(e.message));
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const started = Date.now();
 let projector;
+let projectorStart;
+let projectorEnd;
 try {
   await page.goto(url);
   await page.getByRole("button", { name: "Try 24-person sample" }).click();
@@ -62,8 +64,10 @@ try {
   await projector
     .getByText("Round 2 / 4 · New perspectives", { exact: true })
     .waitFor();
+  projectorStart = (Date.now() - started) / 1000;
   await projector.screenshot({ path: "docs/media/04-projector.png" });
   await pause(3500);
+  projectorEnd = (Date.now() - started) / 1000;
   await page.bringToFront();
   await page.getByRole("button", { name: "Print routes" }).click();
   await pause(3000);
@@ -91,6 +95,14 @@ try {
     "error",
     "-i",
     source,
+    "-loop",
+    "1",
+    "-i",
+    "docs/media/04-projector.png",
+    "-filter_complex",
+    `[0:v]trim=0:${projectorStart},setpts=PTS-STARTPTS,fps=25,format=yuv420p[a];[1:v]scale=1440:810,pad=1440:1000:0:95:color=0x15251e,trim=duration=${projectorEnd - projectorStart},setpts=PTS-STARTPTS,fps=25,format=yuv420p[b];[0:v]trim=start=${projectorEnd},setpts=PTS-STARTPTS,fps=25,format=yuv420p[c];[a][b][c]concat=n=3:v=1:a=0[out]`,
+    "-map",
+    "[out]",
     "-c:v",
     "libx264",
     "-preset",
@@ -103,7 +115,9 @@ try {
     "+faststart",
     "docs/media/rehearsal.mp4",
   ]);
-  console.log("Recorded actual browser rehearsal: docs/media/rehearsal.mp4");
+  console.log(
+    "Recorded actual browser rehearsal with an explicitly edited real projector snapshot: docs/media/rehearsal.mp4",
+  );
 } catch {
   console.log(
     "MP4 conversion unavailable; actual WebM and screenshot sequence recorded.",

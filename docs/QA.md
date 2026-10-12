@@ -36,7 +36,7 @@ the second viewport in a fresh real projector tab. A unit fixture initially spen
 optimization budget; it now uses a small explicit budget appropriate to its atomic-undo assertion.
 No required test was skipped to obtain a green run.
 
-The recorded synthetic rehearsal is about **28 seconds** and has five real screenshots plus
+The recorded synthetic rehearsal is about **25 seconds** and has five real screenshots plus
 the saved after-repair event. The public print examples are actual Chromium PDFs.
 All 201 locked dependency entries have compatible recorded licenses; npm audit after the
 esbuild 0.28.1 fix reported **0 vulnerabilities** on 2026-10-12. Runtime notices include full text.

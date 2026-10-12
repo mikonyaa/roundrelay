@@ -156,6 +156,7 @@ test("running late arrival preserves assignments/status/timer; draft reload/canc
   await page.getByLabel("Field maximum", { exact: true }).fill("7");
   await saved(page);
   await page.reload();
+  await expect(page.getByTestId("timer")).toBeVisible();
   if (
     await page.getByRole("button", { name: "Recover saved event" }).isVisible()
   ) {
@@ -314,13 +315,11 @@ test("malformed imports, oversized files and inert HTML cannot replace the curre
   await page.getByLabel("Event JSON").fill("{");
   await page.getByRole("button", { name: "Preview JSON" }).click();
   await expect(page.getByRole("alert")).toBeVisible();
-  await page
-    .getByLabel("Choose JSON")
-    .setInputFiles({
-      name: "too-large.json",
-      mimeType: "application/json",
-      buffer: Buffer.alloc(2097153, 32),
-    });
+  await page.getByLabel("Choose JSON").setInputFiles({
+    name: "too-large.json",
+    mimeType: "application/json",
+    buffer: Buffer.alloc(2097153, 32),
+  });
   await expect(
     page.getByText("Input exceeds the 2 MiB limit", { exact: true }),
   ).toBeVisible();
@@ -343,24 +342,20 @@ test("quoted CSV preview preserves two same labels and reports stable assignment
 }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Import your plan" }).click();
-  await page
-    .getByLabel("participants.csv", { exact: true })
-    .setInputFiles({
-      name: "participants.csv",
-      mimeType: "text/csv",
-      buffer: Buffer.from(
-        '\uFEFFparticipant_id,public_label\r\np01,"Sage, 星"\r\np02,"Sage, 星"\r\n',
-      ),
-    });
-  await page
-    .getByLabel("assignments.csv", { exact: true })
-    .setInputFiles({
-      name: "assignments.csv",
-      mimeType: "text/csv",
-      buffer: Buffer.from(
-        "round,group,participant_id\r\n1,g1,p02\r\n1,g1,p01\r\n",
-      ),
-    });
+  await page.getByLabel("participants.csv", { exact: true }).setInputFiles({
+    name: "participants.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from(
+      '\uFEFFparticipant_id,public_label\r\np01,"Sage, 星"\r\np02,"Sage, 星"\r\n',
+    ),
+  });
+  await page.getByLabel("assignments.csv", { exact: true }).setInputFiles({
+    name: "assignments.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from(
+      "round,group,participant_id\r\n1,g1,p02\r\n1,g1,p01\r\n",
+    ),
+  });
   await page.getByLabel("Group minimum").fill("1");
   await page.getByRole("button", { name: "Preview CSV" }).click();
   await page.getByRole("button", { name: "Open reviewed plan" }).click();
@@ -511,6 +506,7 @@ test("60 people, long labels, measured worker cancellation, projector pagination
   await page.screenshot({
     path: "output/playwright/long-label-print.png",
     fullPage: true,
+    scale: "css",
   });
   if (browserName === "chromium") {
     await page.emulateMedia({ media: "print" });
