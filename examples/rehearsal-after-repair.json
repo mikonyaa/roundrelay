@@ -1,0 +1,2989 @@
+{
+  "kind": "roundrelay-event",
+  "schemaVersion": 1,
+  "eventId": "sample-24",
+  "revision": 4,
+  "title": "Small circles, fresh perspectives",
+  "participants": [
+    {
+      "participantId": "p01",
+      "publicLabel": "Aster"
+    },
+    {
+      "participantId": "p02",
+      "publicLabel": "Birch"
+    },
+    {
+      "participantId": "p03",
+      "publicLabel": "Cedar"
+    },
+    {
+      "participantId": "p04",
+      "publicLabel": "Dune"
+    },
+    {
+      "participantId": "p05",
+      "publicLabel": "Ember"
+    },
+    {
+      "participantId": "p06",
+      "publicLabel": "Fern"
+    },
+    {
+      "participantId": "p07",
+      "publicLabel": "Grove"
+    },
+    {
+      "participantId": "p08",
+      "publicLabel": "Harbor"
+    },
+    {
+      "participantId": "p09",
+      "publicLabel": "Iris"
+    },
+    {
+      "participantId": "p10",
+      "publicLabel": "Juniper"
+    },
+    {
+      "participantId": "p11",
+      "publicLabel": "Kite"
+    },
+    {
+      "participantId": "p12",
+      "publicLabel": "Linden"
+    },
+    {
+      "participantId": "p13",
+      "publicLabel": "Moss"
+    },
+    {
+      "participantId": "p14",
+      "publicLabel": "North"
+    },
+    {
+      "participantId": "p15",
+      "publicLabel": "Orbit"
+    },
+    {
+      "participantId": "p16",
+      "publicLabel": "Pebble"
+    },
+    {
+      "participantId": "p17",
+      "publicLabel": "Quartz"
+    },
+    {
+      "participantId": "p18",
+      "publicLabel": "Reed"
+    },
+    {
+      "participantId": "p19",
+      "publicLabel": "Sage"
+    },
+    {
+      "participantId": "p20",
+      "publicLabel": "Tide"
+    },
+    {
+      "participantId": "p21",
+      "publicLabel": "Umber"
+    },
+    {
+      "participantId": "p22",
+      "publicLabel": "Vale"
+    },
+    {
+      "participantId": "p23",
+      "publicLabel": "Willow"
+    },
+    {
+      "participantId": "p24",
+      "publicLabel": "Zephyr"
+    }
+  ],
+  "rounds": [
+    {
+      "roundId": "r1",
+      "order": 1,
+      "publicTitle": "Opening exchanges",
+      "durationMs": 300000,
+      "groups": [
+        {
+          "groupId": "g1",
+          "publicLabel": "Field",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g2",
+          "publicLabel": "Studio",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g3",
+          "publicLabel": "Garden",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g4",
+          "publicLabel": "Library",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "p01",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p02",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p03",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p04",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p05",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p06",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p07",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p08",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p09",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p10",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p11",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p12",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p13",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p14",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p15",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p16",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p17",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p18",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p19",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p20",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p21",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p22",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p23",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p24",
+          "groupId": "g4"
+        }
+      ],
+      "status": "completed",
+      "timer": {
+        "durationMs": 300000,
+        "deadlineEpochMs": null,
+        "remainingMs": 297384,
+        "startedAtEpochMs": 1791829785472
+      },
+      "frozen": {
+        "publicTitle": "Opening exchanges",
+        "durationMs": 300000,
+        "groups": [
+          {
+            "groupId": "g1",
+            "publicLabel": "Field",
+            "minSize": 4,
+            "maxSize": 6,
+            "enabled": true
+          },
+          {
+            "groupId": "g2",
+            "publicLabel": "Studio",
+            "minSize": 4,
+            "maxSize": 6,
+            "enabled": true
+          },
+          {
+            "groupId": "g3",
+            "publicLabel": "Garden",
+            "minSize": 4,
+            "maxSize": 6,
+            "enabled": true
+          },
+          {
+            "groupId": "g4",
+            "publicLabel": "Library",
+            "minSize": 4,
+            "maxSize": 6,
+            "enabled": true
+          }
+        ],
+        "assignments": [
+          {
+            "participantId": "p01",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p02",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p03",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p04",
+            "groupId": "g4"
+          },
+          {
+            "participantId": "p05",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p06",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p07",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p08",
+            "groupId": "g4"
+          },
+          {
+            "participantId": "p09",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p10",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p11",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p12",
+            "groupId": "g4"
+          },
+          {
+            "participantId": "p13",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p14",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p15",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p16",
+            "groupId": "g4"
+          },
+          {
+            "participantId": "p17",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p18",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p19",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p20",
+            "groupId": "g4"
+          },
+          {
+            "participantId": "p21",
+            "groupId": "g1"
+          },
+          {
+            "participantId": "p22",
+            "groupId": "g2"
+          },
+          {
+            "participantId": "p23",
+            "groupId": "g3"
+          },
+          {
+            "participantId": "p24",
+            "groupId": "g4"
+          }
+        ],
+        "publicParticipants": [
+          {
+            "participantId": "p01",
+            "publicLabel": "Aster"
+          },
+          {
+            "participantId": "p02",
+            "publicLabel": "Birch"
+          },
+          {
+            "participantId": "p03",
+            "publicLabel": "Cedar"
+          },
+          {
+            "participantId": "p04",
+            "publicLabel": "Dune"
+          },
+          {
+            "participantId": "p05",
+            "publicLabel": "Ember"
+          },
+          {
+            "participantId": "p06",
+            "publicLabel": "Fern"
+          },
+          {
+            "participantId": "p07",
+            "publicLabel": "Grove"
+          },
+          {
+            "participantId": "p08",
+            "publicLabel": "Harbor"
+          },
+          {
+            "participantId": "p09",
+            "publicLabel": "Iris"
+          },
+          {
+            "participantId": "p10",
+            "publicLabel": "Juniper"
+          },
+          {
+            "participantId": "p11",
+            "publicLabel": "Kite"
+          },
+          {
+            "participantId": "p12",
+            "publicLabel": "Linden"
+          },
+          {
+            "participantId": "p13",
+            "publicLabel": "Moss"
+          },
+          {
+            "participantId": "p14",
+            "publicLabel": "North"
+          },
+          {
+            "participantId": "p15",
+            "publicLabel": "Orbit"
+          },
+          {
+            "participantId": "p16",
+            "publicLabel": "Pebble"
+          },
+          {
+            "participantId": "p17",
+            "publicLabel": "Quartz"
+          },
+          {
+            "participantId": "p18",
+            "publicLabel": "Reed"
+          },
+          {
+            "participantId": "p19",
+            "publicLabel": "Sage"
+          },
+          {
+            "participantId": "p20",
+            "publicLabel": "Tide"
+          },
+          {
+            "participantId": "p21",
+            "publicLabel": "Umber"
+          },
+          {
+            "participantId": "p22",
+            "publicLabel": "Vale"
+          },
+          {
+            "participantId": "p23",
+            "publicLabel": "Willow"
+          },
+          {
+            "participantId": "p24",
+            "publicLabel": "Zephyr"
+          }
+        ],
+        "availability": [
+          {
+            "participantId": "p01",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r1",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r1",
+            "available": true
+          }
+        ],
+        "mustSeparate": []
+      }
+    },
+    {
+      "roundId": "r2",
+      "order": 2,
+      "publicTitle": "New perspectives",
+      "durationMs": 300000,
+      "groups": [
+        {
+          "groupId": "g1",
+          "publicLabel": "Field",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g2",
+          "publicLabel": "Studio",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g3",
+          "publicLabel": "Garden",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g4",
+          "publicLabel": "Library",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "p03",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p04",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p05",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p06",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p07",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p08",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p09",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p10",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p11",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p12",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p13",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p14",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p15",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p16",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p17",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p18",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p19",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p20",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p21",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p22",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p23",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p24",
+          "groupId": "g1"
+        }
+      ],
+      "status": "planned",
+      "timer": null,
+      "frozen": null
+    },
+    {
+      "roundId": "r3",
+      "order": 3,
+      "publicTitle": "Build together",
+      "durationMs": 300000,
+      "groups": [
+        {
+          "groupId": "g1",
+          "publicLabel": "Field",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g2",
+          "publicLabel": "Studio",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g3",
+          "publicLabel": "Garden",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g4",
+          "publicLabel": "Library",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "p03",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p04",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p05",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p06",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p07",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p08",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p09",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p10",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p11",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p12",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p13",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p14",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p15",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p16",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p17",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p18",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p19",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p20",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p21",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p22",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p23",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p24",
+          "groupId": "g2"
+        }
+      ],
+      "status": "planned",
+      "timer": null,
+      "frozen": null
+    },
+    {
+      "roundId": "r4",
+      "order": 4,
+      "publicTitle": "Carry it forward",
+      "durationMs": 300000,
+      "groups": [
+        {
+          "groupId": "g1",
+          "publicLabel": "Field",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g2",
+          "publicLabel": "Studio",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g3",
+          "publicLabel": "Garden",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        },
+        {
+          "groupId": "g4",
+          "publicLabel": "Library",
+          "minSize": 4,
+          "maxSize": 6,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "p03",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p04",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p05",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p06",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p07",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p08",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p09",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p10",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p11",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p12",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p13",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p14",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p15",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p16",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p17",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p18",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p19",
+          "groupId": "g3"
+        },
+        {
+          "participantId": "p20",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p21",
+          "groupId": "g4"
+        },
+        {
+          "participantId": "p22",
+          "groupId": "g1"
+        },
+        {
+          "participantId": "p23",
+          "groupId": "g2"
+        },
+        {
+          "participantId": "p24",
+          "groupId": "g3"
+        }
+      ],
+      "status": "planned",
+      "timer": null,
+      "frozen": null
+    }
+  ],
+  "availability": [
+    {
+      "participantId": "p01",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p02",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p03",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p04",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p05",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p06",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p07",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p08",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p09",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p10",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p11",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p12",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p13",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p14",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p15",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p16",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p17",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p18",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p19",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p20",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p21",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p22",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p23",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p24",
+      "roundId": "r1",
+      "available": true
+    },
+    {
+      "participantId": "p01",
+      "roundId": "r2",
+      "available": false
+    },
+    {
+      "participantId": "p02",
+      "roundId": "r2",
+      "available": false
+    },
+    {
+      "participantId": "p03",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p04",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p05",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p06",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p07",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p08",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p09",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p10",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p11",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p12",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p13",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p14",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p15",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p16",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p17",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p18",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p19",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p20",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p21",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p22",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p23",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p24",
+      "roundId": "r2",
+      "available": true
+    },
+    {
+      "participantId": "p01",
+      "roundId": "r3",
+      "available": false
+    },
+    {
+      "participantId": "p02",
+      "roundId": "r3",
+      "available": false
+    },
+    {
+      "participantId": "p03",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p04",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p05",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p06",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p07",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p08",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p09",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p10",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p11",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p12",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p13",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p14",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p15",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p16",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p17",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p18",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p19",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p20",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p21",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p22",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p23",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p24",
+      "roundId": "r3",
+      "available": true
+    },
+    {
+      "participantId": "p01",
+      "roundId": "r4",
+      "available": false
+    },
+    {
+      "participantId": "p02",
+      "roundId": "r4",
+      "available": false
+    },
+    {
+      "participantId": "p03",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p04",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p05",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p06",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p07",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p08",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p09",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p10",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p11",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p12",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p13",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p14",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p15",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p16",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p17",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p18",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p19",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p20",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p21",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p22",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p23",
+      "roundId": "r4",
+      "available": true
+    },
+    {
+      "participantId": "p24",
+      "roundId": "r4",
+      "available": true
+    }
+  ],
+  "constraints": {
+    "mustSeparate": []
+  },
+  "conductor": {
+    "activeRoundId": null,
+    "pendingDraft": null
+  },
+  "repairHistory": [
+    {
+      "operationId": "repair-4",
+      "revisionAfter": 4,
+      "createdAtEpochMs": 1791829794404,
+      "inputHash": "09d35cc9fa70f904",
+      "before": {
+        "rounds": [
+          {
+            "roundId": "r2",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p01",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p02",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g1"
+              }
+            ]
+          },
+          {
+            "roundId": "r3",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p01",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p02",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g2"
+              }
+            ]
+          },
+          {
+            "roundId": "r4",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p01",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p02",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g3"
+              }
+            ]
+          }
+        ],
+        "availability": [
+          {
+            "participantId": "p01",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p01",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p01",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r4",
+            "available": true
+          }
+        ]
+      },
+      "after": {
+        "rounds": [
+          {
+            "roundId": "r2",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g1"
+              }
+            ]
+          },
+          {
+            "roundId": "r3",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g2"
+              }
+            ]
+          },
+          {
+            "roundId": "r4",
+            "groups": [
+              {
+                "groupId": "g1",
+                "publicLabel": "Field",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g2",
+                "publicLabel": "Studio",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g3",
+                "publicLabel": "Garden",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              },
+              {
+                "groupId": "g4",
+                "publicLabel": "Library",
+                "minSize": 4,
+                "maxSize": 6,
+                "enabled": true
+              }
+            ],
+            "assignments": [
+              {
+                "participantId": "p03",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p04",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p05",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p06",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p07",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p08",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p09",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p10",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p11",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p12",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p13",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p14",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p15",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p16",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p17",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p18",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p19",
+                "groupId": "g3"
+              },
+              {
+                "participantId": "p20",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p21",
+                "groupId": "g4"
+              },
+              {
+                "participantId": "p22",
+                "groupId": "g1"
+              },
+              {
+                "participantId": "p23",
+                "groupId": "g2"
+              },
+              {
+                "participantId": "p24",
+                "groupId": "g3"
+              }
+            ]
+          }
+        ],
+        "availability": [
+          {
+            "participantId": "p01",
+            "roundId": "r2",
+            "available": false
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r2",
+            "available": false
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r2",
+            "available": true
+          },
+          {
+            "participantId": "p01",
+            "roundId": "r3",
+            "available": false
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r3",
+            "available": false
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r3",
+            "available": true
+          },
+          {
+            "participantId": "p01",
+            "roundId": "r4",
+            "available": false
+          },
+          {
+            "participantId": "p02",
+            "roundId": "r4",
+            "available": false
+          },
+          {
+            "participantId": "p03",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p04",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p05",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p06",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p07",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p08",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p09",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p10",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p11",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p12",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p13",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p14",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p15",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p16",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p17",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p18",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p19",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p20",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p21",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p22",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p23",
+            "roundId": "r4",
+            "available": true
+          },
+          {
+            "participantId": "p24",
+            "roundId": "r4",
+            "available": true
+          }
+        ]
+      },
+      "undone": false,
+      "moved": 0,
+      "added": 0,
+      "removed": 6,
+      "plannerVersion": "bounded-preserve-1"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2026-10-12T00:00:00Z",
+    "appVersion": "0.1.0",
+    "source": "Original synthetic RoundRelay sample"
+  }
+}
