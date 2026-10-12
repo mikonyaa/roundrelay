@@ -6,8 +6,11 @@ A finished local conductor for 20–60 participants and 3–6 rounds. Import an 
 run the room, and preview a small future repair when someone leaves or arrives. Current
 and completed rounds stay frozen. No account, paid API or application server.
 
-**[Demo](docs/DEMO.md)** · **[Sample JSON](examples/workshop-24.json)** ·
-**[CSV templates](examples)** · downloadable web ZIP in the Releases tab.
+**[Try sample](https://mikonyaa.github.io/roundrelay/)** ·
+**[Releases](https://github.com/mikonyaa/roundrelay/releases)** · **[Demo](docs/DEMO.md)**
+
+[Sample JSON](examples/workshop-24.json) · [CSV templates](examples) ·
+[Public release QA](docs/POST-RELEASE-QA.md).
 
 ![RoundRelay conductor](docs/media/01-running.png)
 
