@@ -5,6 +5,7 @@ import { undoReason, protectionFingerprint } from "../history";
 import { DEFAULT_OPTIONS, patchMatches, type Proposal } from "../planner";
 import { clockAmbiguity, formatTime, remaining } from "../timer";
 import { validateProject } from "../validate";
+import { operationalReadiness } from "../conductor/readiness";
 import { validateProposal } from "../validate/proposal";
 import { exportRoutesCSV } from "../import";
 import { useProjection } from "../projector/useProjection";
@@ -62,6 +63,7 @@ export function App() {
   const active = p?.rounds.find((r) => r.roundId === p.conductor.activeRoundId);
   const display = active ?? future[0] ?? (p ? ordered(p).at(-1) : undefined);
   const diagnostics = useMemo(() => (p ? validateProject(p) : []), [p]);
+  const readiness = useMemo(() => (p ? operationalReadiness(p) : null), [p]);
   const fresh =
     !!p &&
     !!proposal &&
@@ -333,7 +335,13 @@ export function App() {
               </div>
               <nav className="utility-actions" aria-label="Event tools">
                 <button onClick={backup}>Download backup</button>
-                <button onClick={() => setPrinting(true)}>Print routes</button>
+                <button
+                  disabled={!readiness?.routesReady}
+                  title={readiness?.routeReason ?? undefined}
+                  onClick={() => setPrinting(true)}
+                >
+                  Print routes
+                </button>
                 <button disabled={readOnly} onClick={() => setImporting(true)}>
                   Import
                 </button>
@@ -359,6 +367,9 @@ export function App() {
             {diagnostics.length > 0 && (
               <div className="error" role="alert">
                 <strong>This is an invalid draft. Starting is blocked.</strong>
+                {readiness?.routeReason && (
+                  <p id="route-readiness">{readiness.routeReason}</p>
+                )}
                 <ul>
                   {diagnostics.slice(0, 10).map((d, i) => (
                     <li key={i}>
@@ -431,10 +442,7 @@ export function App() {
                       <button
                         className="primary"
                         disabled={
-                          !future.length ||
-                          !!p.conductor.pendingDraft ||
-                          !!diagnostics.length ||
-                          readOnly
+                          !future.length || !!readiness?.startReason || readOnly
                         }
                         onClick={() =>
                           dispatch({ type: "start", now: Date.now() })
@@ -1075,6 +1083,8 @@ export function App() {
               </p>
               <div>
                 <button
+                  disabled={!readiness?.routesReady}
+                  title={readiness?.routeReason ?? undefined}
                   onClick={() =>
                     download(
                       `roundrelay-routes-v${p.revision}.csv`,

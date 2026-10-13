@@ -95,7 +95,9 @@ export function Projector() {
           <strong data-testid="projector-timer">
             {payload?.timer
               ? formatTime(remaining(payload.timer, now))
-              : "Ready"}
+              : payload?.status === "unavailable"
+                ? "Unavailable"
+                : "Ready"}
           </strong>
           <span>
             {expired ? "Time is up · wait for your host" : payload?.status}
@@ -106,7 +108,7 @@ export function Projector() {
         {lastUpdate && now - lastUpdate > 6500
           ? "Disconnected / stale · waiting for the conductor"
           : payload
-            ? `Live · plan version ${payload.revision}`
+            ? `${payload.status === "unavailable" ? "Connected · routes unavailable" : "Live"} · plan version ${payload.revision}`
             : "Waiting for conductor"}
         {message && ` · ${message}`}
       </div>

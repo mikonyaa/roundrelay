@@ -1,4 +1,5 @@
 import { ordered, type EventProject } from "../model/schema";
+import { operationalReadiness } from "../conductor/readiness";
 export function PrintPreview({
   project: p,
   onClose,
@@ -6,6 +7,18 @@ export function PrintPreview({
   project: EventProject;
   onClose: () => void;
 }) {
+  const readiness = operationalReadiness(p);
+  if (!readiness.routesReady)
+    return (
+      <div className="print-preview">
+        <div className="print-toolbar">
+          <button onClick={onClose}>Back to conductor</button>
+        </div>
+        <p className="error" role="alert">
+          {readiness.routeReason}
+        </p>
+      </div>
+    );
   return (
     <div className="print-preview">
       <div className="print-toolbar">
@@ -63,7 +76,18 @@ export function PrintPreview({
                       <td>
                         {r.order}. {r.publicTitle}
                       </td>
-                      <td>{g?.publicLabel ?? "Not attending"}</td>
+                      <td>
+                        {g?.publicLabel ??
+                          (p.availability.some(
+                            (availability) =>
+                              availability.roundId === r.roundId &&
+                              availability.participantId ===
+                                person.participantId &&
+                              !availability.available,
+                          )
+                            ? "Not attending"
+                            : "Invalid destination")}
+                      </td>
                       <td>
                         {r.status === "completed" ? "Historical" : r.status}
                       </td>

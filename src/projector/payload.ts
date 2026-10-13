@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { timerSchema, type EventProject } from "../model/schema";
+import { operationalReadiness } from "../conductor/readiness";
 export const publicPayloadSchema = z.strictObject({
   version: z.literal(1),
   type: z.literal("snapshot"),
@@ -7,7 +8,14 @@ export const publicPayloadSchema = z.strictObject({
   sentAt: z.number(),
   publicTitle: z.string().max(120),
   roundLabel: z.string().max(180),
-  status: z.enum(["planned", "running", "paused", "completed", "finished"]),
+  status: z.enum([
+    "planned",
+    "running",
+    "paused",
+    "completed",
+    "finished",
+    "unavailable",
+  ]),
   timer: timerSchema.nullable(),
   groups: z
     .array(
@@ -22,6 +30,18 @@ export type PublicPayload = z.infer<typeof publicPayloadSchema>;
 export const channelName = (sessionId: string): string =>
   `roundrelay-public-v2-${sessionId}`;
 export function publicPayload(p: EventProject): PublicPayload {
+  if (!operationalReadiness(p).routesReady)
+    return {
+      version: 1,
+      type: "snapshot",
+      revision: p.revision,
+      sentAt: Date.now(),
+      publicTitle: p.title,
+      roundLabel: "Routes unavailable · repair the draft in the conductor",
+      status: "unavailable",
+      timer: null,
+      groups: [],
+    };
   const r =
     p.rounds.find((r) => r.roundId === p.conductor.activeRoundId) ??
     [...p.rounds]

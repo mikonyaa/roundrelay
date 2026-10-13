@@ -1,6 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 import { lifecycleProject } from "../fixtures/lifecycle";
 import type { EventProject } from "../../src/model/schema";
+import { readFile } from "node:fs/promises";
+import { validateProject } from "../../src/validate";
 
 async function importPlan(page: Page, project: EventProject, replace = false) {
   if (!replace) await page.goto("/");
@@ -32,6 +34,81 @@ async function openProjector(page: Page) {
     projector.getByRole("heading", { name: "ALPHA", exact: true }),
   ).toBeVisible();
   return projector;
+}
+
+for (const fault of ["group", "participant"] as const) {
+  test(`RR-2: invalid ${fault} stays backed up and repair unlocks routes`, async ({
+    page,
+  }) => {
+    const p = lifecycleProject();
+    if (fault === "group") p.rounds[0].assignments[0].groupId = "unknown-group";
+    else p.rounds[0].assignments[0].participantId = "unknown-person";
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await importPlan(page, p);
+    await expect(
+      page.getByRole("button", { name: "Print routes", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: "Export routes CSV", exact: true }),
+    ).toBeDisabled();
+    const [backup] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: "Download backup" }).click(),
+    ]);
+    expect(JSON.parse(await readFile((await backup.path())!, "utf8"))).toEqual(
+      p,
+    );
+    const [projector] = await Promise.all([
+      page.waitForEvent("popup"),
+      page.getByRole("button", { name: "Open projector" }).click(),
+    ]);
+    await expect(
+      projector.locator(".projector-header p"),
+    ).toContainText("Routes unavailable");
+    await expect(projector.locator(".projector-groups li")).toHaveCount(0);
+    await page.getByText("Edit future group bounds").click();
+    await page.getByLabel("East maximum").fill("3");
+    await page
+      .getByRole("button", { name: "Preview repair", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Apply future repair", exact: true }),
+    ).toBeEnabled();
+    await page
+      .getByRole("button", { name: "Apply future repair", exact: true })
+      .click();
+    await expect(
+      page.getByText("Saved locally", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Export routes CSV", exact: true }),
+    ).toBeEnabled();
+    const [repairedBackup] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: "Download backup" }).click(),
+    ]);
+    expect(
+      validateProject(
+        JSON.parse(await readFile((await repairedBackup.path())!, "utf8")),
+      ),
+    ).toEqual([]);
+    const [csv] = await Promise.all([
+      page.waitForEvent("download"),
+      page
+        .getByRole("button", { name: "Export routes CSV", exact: true })
+        .click(),
+    ]);
+    const text = await readFile((await csv.path())!, "utf8");
+    expect(text).not.toContain("PRIVATE_");
+    expect(text).not.toContain("unknown-");
+    await page
+      .getByRole("button", { name: "Print routes", exact: true })
+      .click();
+    await expect(page.locator(".route")).toHaveCount(4);
+    expect(await page.content()).not.toContain("Not attending");
+    expect(errors).toEqual([]);
+  });
 }
 
 test("RR-1: an existing projector follows ALPHA20 to BETA0", async ({
@@ -110,9 +187,13 @@ test("RR-1: the same projector follows a conductor reload", async ({
   await importPlan(page, lifecycleProject());
   const projector = await openProjector(page);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "ALPHA", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "ALPHA", exact: true }),
+  ).toBeVisible();
   // A reload can leave the old lease until expiry; recovery is the existing explicit handoff.
-  if (await page.getByRole("button", { name: "Recover saved event" }).isVisible()) {
+  if (
+    await page.getByRole("button", { name: "Recover saved event" }).isVisible()
+  ) {
     await page.waitForTimeout(5500);
     await page.getByRole("button", { name: "Recover saved event" }).click();
   }

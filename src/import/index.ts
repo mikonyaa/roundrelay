@@ -1,4 +1,5 @@
 import Papa from "papaparse";
+import { requireOperationalRoutes } from "../conductor/readiness";
 import {
   LIMITS,
   projectSchema,
@@ -183,6 +184,7 @@ export const csvCell = (value: string): string => {
   return `"${safe.replaceAll('"', '""')}"`;
 };
 export function exportRoutesCSV(p: EventProject): string {
+  requireOperationalRoutes(p);
   const lines = [
     "plan_revision,round,status,participant_id,public_label,group",
   ];

@@ -15,7 +15,8 @@ import {
 import { pauseTimer, remaining, resumeTimer, startTimer } from "../timer";
 import { patchedProject, scorePlan, type Proposal } from "../planner";
 import { validateProposal } from "../validate/proposal";
-import { validateProject, validateRound } from "../validate";
+import { validateProject } from "../validate";
+import { operationalReadiness } from "./readiness";
 
 export type Command =
   | { type: "start"; now: number }
@@ -41,12 +42,8 @@ export function reduceProject(
       if (active) return base;
       const next = ordered(p).find((r) => r.status === "planned");
       if (!next) return base;
-      if (p.conductor.pendingDraft)
-        throw new Error(
-          "Apply or cancel the pending future draft before starting a round",
-        );
-      if (validateProject(p).length || validateRound(p, next).length)
-        throw new Error("Fix hard constraints before starting");
+      const { startReason } = operationalReadiness(p);
+      if (startReason) throw new Error(startReason);
       next.status = "running";
       next.timer = startTimer(next.durationMs, command.now);
       next.frozen = clone({
