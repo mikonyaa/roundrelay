@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  channelName,
-  publicPayloadSchema,
-  type PublicPayload,
-} from "./payload";
+import { channelName, type PublicPayload } from "./payload";
+import { ProjectionReceiver } from "./transport";
 import { formatTime, remaining } from "../timer";
 
 export function Projector() {
@@ -27,22 +24,17 @@ export function Projector() {
       };
     }
     const channel = new BroadcastChannel(channelName(sessionId));
+    const receiver = new ProjectionReceiver(sessionId);
     channel.onmessage = (e) => {
-      const parsed = publicPayloadSchema.safeParse(e.data);
-      if (parsed.success) {
-        setPayload((previous) =>
-          !previous || parsed.data.revision >= previous.revision
-            ? parsed.data
-            : previous,
-        );
-        setLastUpdate(Date.now());
+      if (receiver.accept(e.data)) {
+        setPayload(receiver.payload);
+        setLastUpdate(receiver.lastAcceptedAt);
       }
     };
-    channel.postMessage({ version: 1, type: "request-snapshot" });
-    const request = setInterval(
-      () => channel.postMessage({ version: 1, type: "request-snapshot" }),
-      3000,
-    );
+    const requestSnapshot = () =>
+      channel.postMessage({ version: 2, type: "request-snapshot", sessionId });
+    requestSnapshot();
+    const request = setInterval(requestSnapshot, 3000);
     return () => {
       clearInterval(tick);
       clearInterval(request);

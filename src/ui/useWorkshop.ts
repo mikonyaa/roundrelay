@@ -10,6 +10,7 @@ export function useWorkshop() {
   const [readOnly, setReadOnly] = useState(false);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState("");
+  const [workspaceVersion, setWorkspaceVersion] = useState(0);
   const storage = useRef(new ProjectStorage());
   const generation = useRef(0);
   const queue = useRef(Promise.resolve());
@@ -112,7 +113,10 @@ export function useWorkshop() {
     }
   };
   const replace = (p: EventProject) => {
-    if (!readOnly) persist(clone(p));
+    if (!readOnly) {
+      setWorkspaceVersion((version) => version + 1);
+      persist(clone(p));
+    }
   };
   const recover = async () => {
     try {
@@ -126,6 +130,7 @@ export function useWorkshop() {
       }
       generation.current = result.generation;
       failed.current = false;
+      setWorkspaceVersion((version) => version + 1);
       adopt(result.project);
       setReadOnly(false);
       setSaveStatus("Saved locally");
@@ -144,5 +149,6 @@ export function useWorkshop() {
     message,
     setMessage,
     recover,
+    workspaceVersion,
   };
 }

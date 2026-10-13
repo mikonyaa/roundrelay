@@ -7,7 +7,7 @@ import { clockAmbiguity, formatTime, remaining } from "../timer";
 import { validateProject } from "../validate";
 import { validateProposal } from "../validate/proposal";
 import { exportRoutesCSV } from "../import";
-import { channelName, publicPayload } from "../projector/payload";
+import { useProjection } from "../projector/useProjection";
 import { PrintPreview } from "../print/PrintPreview";
 import { useWorkshop } from "./useWorkshop";
 import { ImportPanel } from "./ImportPanel";
@@ -54,8 +54,7 @@ export function App() {
   const worker = useRef<Worker | null>(null);
   const current = useRef(p);
   current.current = p;
-  const sessionId = useRef(crypto.randomUUID());
-  const channel = useRef<BroadcastChannel | null>(null);
+  const sessionId = useProjection(p, readOnly, workshop.workspaceVersion);
   const future = p ? ordered(p).filter((r) => r.status === "planned") : [];
   const effectiveId = future.some((r) => r.roundId === effective)
     ? effective
@@ -109,27 +108,6 @@ export function App() {
       document.removeEventListener("visibilitychange", visibility);
     };
   }, []);
-  useEffect(() => {
-    if (!("BroadcastChannel" in window) || readOnly) return;
-    const bc = new BroadcastChannel(channelName(sessionId.current));
-    channel.current = bc;
-    const send = () => {
-      if (current.current) bc.postMessage(publicPayload(current.current));
-    };
-    bc.onmessage = (e) => {
-      if (e.data?.version === 1 && e.data?.type === "request-snapshot") send();
-    };
-    const heartbeat = setInterval(send, 1000);
-    send();
-    return () => {
-      clearInterval(heartbeat);
-      bc.close();
-      channel.current = null;
-    };
-  }, [readOnly]);
-  useEffect(() => {
-    if (p) channel.current?.postMessage(publicPayload(p));
-  }, [p]);
   useEffect(() => {
     worker.current?.terminate();
     worker.current = null;
@@ -267,7 +245,7 @@ export function App() {
   };
   const openProjector = () => {
     const url = new URL(location.href);
-    url.hash = `/projector?session=${sessionId.current}`;
+    url.hash = `/projector?session=${sessionId}`;
     const popup = window.open(url.href, "_blank");
     if (!popup) {
       setMessage(

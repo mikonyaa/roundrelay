@@ -20,7 +20,7 @@ export const publicPayloadSchema = z.strictObject({
 });
 export type PublicPayload = z.infer<typeof publicPayloadSchema>;
 export const channelName = (sessionId: string): string =>
-  `roundrelay-public-v1-${sessionId}`;
+  `roundrelay-public-v2-${sessionId}`;
 export function publicPayload(p: EventProject): PublicPayload {
   const r =
     p.rounds.find((r) => r.roundId === p.conductor.activeRoundId) ??

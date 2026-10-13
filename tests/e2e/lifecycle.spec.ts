@@ -1,0 +1,127 @@
+import { test, expect, type Page } from "@playwright/test";
+import { lifecycleProject } from "../fixtures/lifecycle";
+import type { EventProject } from "../../src/model/schema";
+
+async function importPlan(page: Page, project: EventProject, replace = false) {
+  if (!replace) await page.goto("/");
+  await page
+    .getByRole("button", {
+      name: replace ? "Import" : "Import your plan",
+      exact: true,
+    })
+    .click();
+  await page.getByLabel("Event JSON").fill(JSON.stringify(project));
+  await page.getByRole("button", { name: "Preview JSON", exact: true }).click();
+  await page
+    .getByRole("button", {
+      name: replace
+        ? "Replace open event with reviewed plan"
+        : "Open reviewed plan",
+      exact: true,
+    })
+    .click();
+  await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
+}
+
+async function openProjector(page: Page) {
+  const [projector] = await Promise.all([
+    page.waitForEvent("popup"),
+    page.getByRole("button", { name: "Open projector" }).click(),
+  ]);
+  await expect(
+    projector.getByRole("heading", { name: "ALPHA", exact: true }),
+  ).toBeVisible();
+  return projector;
+}
+
+test("RR-1: an existing projector follows ALPHA20 to BETA0", async ({
+  page,
+}) => {
+  await importPlan(page, lifecycleProject());
+  const projector = await openProjector(page);
+  await importPlan(page, lifecycleProject("beta", 0, "BETA"), true);
+  await expect(
+    projector.getByRole("heading", { name: "BETA", exact: true }),
+  ).toBeVisible();
+  await expect(projector.getByRole("status")).toContainText("plan version 0");
+  expect(await projector.content()).not.toContain("PRIVATE_LIFECYCLE_CANARY");
+});
+
+test("RR-1: an existing projector follows same-event restore ALPHA20 to ALPHA5", async ({
+  page,
+}) => {
+  await importPlan(page, lifecycleProject());
+  const projector = await openProjector(page);
+  const restored = lifecycleProject("alpha", 5, "ALPHA restored");
+  restored.participants[0].publicLabel = "PUBLIC RESTORED";
+  await importPlan(page, restored, true);
+  await expect(
+    projector.getByRole("heading", { name: "ALPHA restored", exact: true }),
+  ).toBeVisible();
+  await expect(
+    projector.getByText("PUBLIC RESTORED", { exact: true }),
+  ).toBeVisible();
+  await expect(projector.getByRole("status")).toContainText("plan version 5");
+});
+
+test("RR-1: replayed old packets cannot keep a disconnected projector Live", async ({
+  page,
+}) => {
+  await importPlan(page, lifecycleProject());
+  const projector = await openProjector(page);
+  const sessionId = new URL(projector.url()).hash.split("session=")[1];
+  // Observe the actual wire protocol, then replay a captured packet with an old business revision.
+  await projector.evaluate(async (session) => {
+    const state = window as unknown as {
+      replay: BroadcastChannel;
+      packet: Record<string, unknown>;
+    };
+    const channel = new BroadcastChannel("roundrelay-public-v2-" + session);
+    state.replay = channel;
+    state.packet = await new Promise<Record<string, unknown>>((resolve) => {
+      channel.onmessage = (e) => {
+        if (e.data?.type === "snapshot") resolve(e.data);
+      };
+      channel.postMessage({
+        version: 2,
+        type: "request-snapshot",
+        sessionId: session,
+      });
+    });
+    (state.packet.payload as Record<string, unknown>).revision = 19;
+  }, sessionId);
+  await page.close();
+  await projector.evaluate(() => {
+    const state = window as unknown as {
+      replay: BroadcastChannel;
+      packet: unknown;
+    };
+    setInterval(() => state.replay.postMessage(state.packet), 400);
+  });
+  await expect(projector.getByRole("status")).toContainText(
+    "Disconnected / stale",
+    { timeout: 12000 },
+  );
+});
+
+test("RR-1: the same projector follows a conductor reload", async ({
+  page,
+}) => {
+  await importPlan(page, lifecycleProject());
+  const projector = await openProjector(page);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "ALPHA", exact: true })).toBeVisible();
+  // A reload can leave the old lease until expiry; recovery is the existing explicit handoff.
+  if (await page.getByRole("button", { name: "Recover saved event" }).isVisible()) {
+    await page.waitForTimeout(5500);
+    await page.getByRole("button", { name: "Recover saved event" }).click();
+  }
+  await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
+  await page
+    .getByRole("button", { name: "Start round 1", exact: true })
+    .click();
+  await expect(projector.getByRole("status")).toContainText("plan version 21");
+  await expect(projector.getByTestId("projector-timer")).not.toHaveText(
+    "Ready",
+  );
+});
