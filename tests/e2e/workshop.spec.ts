@@ -400,10 +400,10 @@ test("privacy canary absent from channel, projector DOM/URL/requests/print; snap
   const observer = await context.newPage();
   await observer.goto("/#/projector?session=" + session);
   const messages = await observer.evaluate(async (sessionId) => {
-    const channel = new BroadcastChannel("roundrelay-public-v1-" + sessionId);
+    const channel = new BroadcastChannel("roundrelay-public-v2-" + sessionId);
     const received: unknown[] = [];
     channel.onmessage = (event) => received.push(event.data);
-    channel.postMessage({ version: 1, type: "request-snapshot" });
+    channel.postMessage({ version: 2, type: "request-snapshot", sessionId });
     await new Promise((resolve) => setTimeout(resolve, 1300));
     channel.close();
     return JSON.stringify(received);

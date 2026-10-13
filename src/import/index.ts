@@ -1,4 +1,6 @@
 import Papa from "papaparse";
+import { APP_VERSION } from "../model/version";
+import { requireOperationalRoutes } from "../conductor/readiness";
 import {
   LIMITS,
   projectSchema,
@@ -150,7 +152,7 @@ export function importCSV(
     repairHistory: [],
     metadata: {
       createdAt: new Date().toISOString(),
-      appVersion: "0.1.0",
+      appVersion: APP_VERSION,
       source: "RoundRelay CSV pair",
     },
   };
@@ -183,6 +185,7 @@ export const csvCell = (value: string): string => {
   return `"${safe.replaceAll('"', '""')}"`;
 };
 export function exportRoutesCSV(p: EventProject): string {
+  requireOperationalRoutes(p);
   const lines = [
     "plan_revision,round,status,participant_id,public_label,group",
   ];

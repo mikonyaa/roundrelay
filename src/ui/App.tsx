@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { checksum, clone, ordered, type Draft } from "../model/schema";
 import { sampleProject } from "../model/sample";
+import { APP_VERSION } from "../model/version";
 import { undoReason, protectionFingerprint } from "../history";
 import { DEFAULT_OPTIONS, patchMatches, type Proposal } from "../planner";
 import { clockAmbiguity, formatTime, remaining } from "../timer";
 import { validateProject } from "../validate";
+import { operationalReadiness } from "../conductor/readiness";
 import { validateProposal } from "../validate/proposal";
 import { exportRoutesCSV } from "../import";
-import { channelName, publicPayload } from "../projector/payload";
+import { useProjection } from "../projector/useProjection";
 import { PrintPreview } from "../print/PrintPreview";
 import { useWorkshop } from "./useWorkshop";
 import { ImportPanel } from "./ImportPanel";
@@ -54,8 +56,7 @@ export function App() {
   const worker = useRef<Worker | null>(null);
   const current = useRef(p);
   current.current = p;
-  const sessionId = useRef(crypto.randomUUID());
-  const channel = useRef<BroadcastChannel | null>(null);
+  const sessionId = useProjection(p, readOnly, workshop.workspaceVersion);
   const future = p ? ordered(p).filter((r) => r.status === "planned") : [];
   const effectiveId = future.some((r) => r.roundId === effective)
     ? effective
@@ -63,6 +64,7 @@ export function App() {
   const active = p?.rounds.find((r) => r.roundId === p.conductor.activeRoundId);
   const display = active ?? future[0] ?? (p ? ordered(p).at(-1) : undefined);
   const diagnostics = useMemo(() => (p ? validateProject(p) : []), [p]);
+  const readiness = useMemo(() => (p ? operationalReadiness(p) : null), [p]);
   const fresh =
     !!p &&
     !!proposal &&
@@ -109,27 +111,6 @@ export function App() {
       document.removeEventListener("visibilitychange", visibility);
     };
   }, []);
-  useEffect(() => {
-    if (!("BroadcastChannel" in window) || readOnly) return;
-    const bc = new BroadcastChannel(channelName(sessionId.current));
-    channel.current = bc;
-    const send = () => {
-      if (current.current) bc.postMessage(publicPayload(current.current));
-    };
-    bc.onmessage = (e) => {
-      if (e.data?.version === 1 && e.data?.type === "request-snapshot") send();
-    };
-    const heartbeat = setInterval(send, 1000);
-    send();
-    return () => {
-      clearInterval(heartbeat);
-      bc.close();
-      channel.current = null;
-    };
-  }, [readOnly]);
-  useEffect(() => {
-    if (p) channel.current?.postMessage(publicPayload(p));
-  }, [p]);
   useEffect(() => {
     worker.current?.terminate();
     worker.current = null;
@@ -267,7 +248,7 @@ export function App() {
   };
   const openProjector = () => {
     const url = new URL(location.href);
-    url.hash = `/projector?session=${sessionId.current}`;
+    url.hash = `/projector?session=${sessionId}`;
     const popup = window.open(url.href, "_blank");
     if (!popup) {
       setMessage(
@@ -292,7 +273,7 @@ export function App() {
           <span className="brand-mark">
             r<span>r</span>
           </span>
-          RoundRelay<span className="version">0.1.0</span>
+          RoundRelay<span className="version">{APP_VERSION}</span>
         </a>
         <div className="save-state" role="status">
           <span
@@ -355,16 +336,28 @@ export function App() {
               </div>
               <nav className="utility-actions" aria-label="Event tools">
                 <button onClick={backup}>Download backup</button>
-                <button onClick={() => setPrinting(true)}>Print routes</button>
+                <button
+                  disabled={!readiness?.routesReady}
+                  title={readiness?.routeReason ?? undefined}
+                  onClick={() => setPrinting(true)}
+                >
+                  Print routes
+                </button>
                 <button disabled={readOnly} onClick={() => setImporting(true)}>
                   Import
                 </button>
               </nav>
             </div>
-            {readOnly && (
+            {(readOnly || workshop.recoveryNeeded) && (
               <div className="notice">
-                <strong>Read-only conductor.</strong> Another tab owns this
-                workspace. Close it before recovering here.{" "}
+                <strong>
+                  {readOnly
+                    ? "Read-only conductor."
+                    : "Local storage needs recovery."}
+                </strong>{" "}
+                Download a backup of unsaved changes before loading the saved
+                event. If another conductor is active, close it before
+                recovering here.{" "}
                 <button onClick={() => void workshop.recover()}>
                   Recover saved event
                 </button>
@@ -381,6 +374,9 @@ export function App() {
             {diagnostics.length > 0 && (
               <div className="error" role="alert">
                 <strong>This is an invalid draft. Starting is blocked.</strong>
+                {readiness?.routeReason && (
+                  <p id="route-readiness">{readiness.routeReason}</p>
+                )}
                 <ul>
                   {diagnostics.slice(0, 10).map((d, i) => (
                     <li key={i}>
@@ -453,10 +449,7 @@ export function App() {
                       <button
                         className="primary"
                         disabled={
-                          !future.length ||
-                          !!p.conductor.pendingDraft ||
-                          !!diagnostics.length ||
-                          readOnly
+                          !future.length || !!readiness?.startReason || readOnly
                         }
                         onClick={() =>
                           dispatch({ type: "start", now: Date.now() })
@@ -1097,6 +1090,8 @@ export function App() {
               </p>
               <div>
                 <button
+                  disabled={!readiness?.routesReady}
+                  title={readiness?.routeReason ?? undefined}
                   onClick={() =>
                     download(
                       `roundrelay-routes-v${p.revision}.csv`,

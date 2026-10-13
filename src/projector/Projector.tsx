@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  channelName,
-  publicPayloadSchema,
-  type PublicPayload,
-} from "./payload";
+import { channelName, type PublicPayload } from "./payload";
+import { ProjectionReceiver } from "./transport";
 import { formatTime, remaining } from "../timer";
 
 export function Projector() {
@@ -26,27 +23,40 @@ export function Projector() {
         window.removeEventListener("resize", resize);
       };
     }
-    const channel = new BroadcastChannel(channelName(sessionId));
-    channel.onmessage = (e) => {
-      const parsed = publicPayloadSchema.safeParse(e.data);
-      if (parsed.success) {
-        setPayload((previous) =>
-          !previous || parsed.data.revision >= previous.revision
-            ? parsed.data
-            : previous,
-        );
-        setLastUpdate(Date.now());
-      }
+    const receiver = new ProjectionReceiver(sessionId);
+    let channel: BroadcastChannel | null = null;
+    let request: ReturnType<typeof setInterval> | undefined;
+    const disconnect = () => {
+      clearInterval(request);
+      channel?.close();
+      channel = null;
     };
-    channel.postMessage({ version: 1, type: "request-snapshot" });
-    const request = setInterval(
-      () => channel.postMessage({ version: 1, type: "request-snapshot" }),
-      3000,
-    );
+    const connect = () => {
+      disconnect();
+      channel = new BroadcastChannel(channelName(sessionId));
+      channel.onmessage = (e) => {
+        if (receiver.accept(e.data)) {
+          setPayload(receiver.payload);
+          setLastUpdate(receiver.lastAcceptedAt);
+        }
+      };
+      const requestSnapshot = () =>
+        channel?.postMessage({
+          version: 2,
+          type: "request-snapshot",
+          sessionId,
+        });
+      requestSnapshot();
+      request = setInterval(requestSnapshot, 3000);
+    };
+    connect();
+    window.addEventListener("pagehide", disconnect);
+    window.addEventListener("pageshow", connect);
     return () => {
       clearInterval(tick);
-      clearInterval(request);
-      channel.close();
+      disconnect();
+      window.removeEventListener("pagehide", disconnect);
+      window.removeEventListener("pageshow", connect);
       window.removeEventListener("resize", resize);
     };
   }, [sessionId]);
@@ -103,7 +113,9 @@ export function Projector() {
           <strong data-testid="projector-timer">
             {payload?.timer
               ? formatTime(remaining(payload.timer, now))
-              : "Ready"}
+              : payload?.status === "unavailable"
+                ? "Unavailable"
+                : "Ready"}
           </strong>
           <span>
             {expired ? "Time is up · wait for your host" : payload?.status}
@@ -114,7 +126,7 @@ export function Projector() {
         {lastUpdate && now - lastUpdate > 6500
           ? "Disconnected / stale · waiting for the conductor"
           : payload
-            ? `Live · plan version ${payload.revision}`
+            ? `${payload.status === "unavailable" ? "Connected · routes unavailable" : "Live"} · plan version ${payload.revision}`
             : "Waiting for conductor"}
         {message && ` · ${message}`}
       </div>

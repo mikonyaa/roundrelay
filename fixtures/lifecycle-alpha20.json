@@ -1,0 +1,169 @@
+{
+  "kind": "roundrelay-event",
+  "schemaVersion": 1,
+  "eventId": "alpha",
+  "revision": 20,
+  "title": "ALPHA",
+  "participants": [
+    {
+      "participantId": "a",
+      "publicLabel": "PUBLIC A",
+      "privateNote": "PRIVATE_LIFECYCLE_CANARY"
+    },
+    {
+      "participantId": "b",
+      "publicLabel": "PUBLIC B"
+    },
+    {
+      "participantId": "c",
+      "publicLabel": "PUBLIC C"
+    },
+    {
+      "participantId": "d",
+      "publicLabel": "PUBLIC D"
+    }
+  ],
+  "rounds": [
+    {
+      "roundId": "round-1",
+      "order": 1,
+      "publicTitle": "Conversation 1",
+      "durationMs": 120000,
+      "groups": [
+        {
+          "groupId": "east",
+          "publicLabel": "East",
+          "minSize": 1,
+          "maxSize": 4,
+          "enabled": true
+        },
+        {
+          "groupId": "west",
+          "publicLabel": "West",
+          "minSize": 1,
+          "maxSize": 4,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "a",
+          "groupId": "east"
+        },
+        {
+          "participantId": "b",
+          "groupId": "east"
+        },
+        {
+          "participantId": "c",
+          "groupId": "west"
+        },
+        {
+          "participantId": "d",
+          "groupId": "west"
+        }
+      ],
+      "status": "planned",
+      "timer": null,
+      "frozen": null
+    },
+    {
+      "roundId": "round-2",
+      "order": 2,
+      "publicTitle": "Conversation 2",
+      "durationMs": 120000,
+      "groups": [
+        {
+          "groupId": "east",
+          "publicLabel": "East",
+          "minSize": 1,
+          "maxSize": 4,
+          "enabled": true
+        },
+        {
+          "groupId": "west",
+          "publicLabel": "West",
+          "minSize": 1,
+          "maxSize": 4,
+          "enabled": true
+        }
+      ],
+      "assignments": [
+        {
+          "participantId": "a",
+          "groupId": "west"
+        },
+        {
+          "participantId": "b",
+          "groupId": "east"
+        },
+        {
+          "participantId": "c",
+          "groupId": "east"
+        },
+        {
+          "participantId": "d",
+          "groupId": "west"
+        }
+      ],
+      "status": "planned",
+      "timer": null,
+      "frozen": null
+    }
+  ],
+  "availability": [
+    {
+      "participantId": "a",
+      "roundId": "round-1",
+      "available": true
+    },
+    {
+      "participantId": "b",
+      "roundId": "round-1",
+      "available": true
+    },
+    {
+      "participantId": "c",
+      "roundId": "round-1",
+      "available": true
+    },
+    {
+      "participantId": "d",
+      "roundId": "round-1",
+      "available": true
+    },
+    {
+      "participantId": "a",
+      "roundId": "round-2",
+      "available": true
+    },
+    {
+      "participantId": "b",
+      "roundId": "round-2",
+      "available": true
+    },
+    {
+      "participantId": "c",
+      "roundId": "round-2",
+      "available": true
+    },
+    {
+      "participantId": "d",
+      "roundId": "round-2",
+      "available": true
+    }
+  ],
+  "constraints": {
+    "mustSeparate": []
+  },
+  "conductor": {
+    "activeRoundId": null,
+    "pendingDraft": null
+  },
+  "repairHistory": [],
+  "metadata": {
+    "createdAt": "2026-10-14T00:00:00Z",
+    "appVersion": "0.1.0",
+    "source": "Independent lifecycle fixture"
+  }
+}

@@ -12,6 +12,10 @@ and completed rounds stay frozen. No account, paid API or application server.
 [Sample JSON](examples/workshop-24.json) · [CSV templates](examples) ·
 [Public release QA](docs/POST-RELEASE-QA.md).
 
+This checkout contains **0.1.1-rc.1**, a local lifecycle candidate. The public links above
+refer to the existing release. See [candidate acceptance](docs/LOCAL-CANDIDATE-QA.md),
+[compatibility](docs/MIGRATION-0.1.1.md) and the [room rehearsal](docs/ROOM-REHEARSAL.md).
+
 ![RoundRelay conductor](docs/media/01-running.png)
 
 ## First result in 60 seconds
@@ -39,7 +43,9 @@ as arrays, explicit availability, conductor state, frozen snapshots and bounded 
 It also preserves an unresolved pending draft across reload or transfer. Import is previewed
 and applied as one snapshot; replacing an open event requires an explicit reviewed action.
 Download its backup first. Structurally valid plans with hard violations can be opened as
-drafts; Start is blocked until fixed. Unsupported versions and malformed input do not replace
+drafts; Start, CSV/print routes and public assignments are blocked until the accepted plan
+passes independent validation. JSON backup and future repair remain available. A pending
+edit to a valid plan does not change its accepted export routes. Unsupported versions and malformed input do not replace
 the open event. [Format and limits](docs/FORMAT.md).
 
 Alternatively, upload both CSVs:
@@ -116,6 +122,9 @@ group labels, public aliases, timer and revision. It never transmits private not
 reasons, history or the complete project. The projector does not read IndexedDB or accept
 commands. It requests a fresh snapshot on connection/reload and marks disconnected data
 stale after conductor heartbeats stop. Popup blocking is explained with a retry action.
+The v2 envelope orders snapshots by a tab session, workspace epoch and sequence, independently
+of the event's revision. An existing projector follows replacement events and older restored
+backups. Rejected packets do not refresh Live. See the [projection protocol](docs/PROJECTION-PROTOCOL.md).
 
 Projector pagination keeps labels readable: standard labels use two groups per page at
 1280×720 and four at 1920×1080, with ten-name parts for larger groups. Long labels use wider
@@ -133,6 +142,8 @@ Reload, backgrounding and controlled renderer suspension are tested with real el
 Visible wall/monotonic disagreement is flagged; remaining time can be corrected manually.
 System-clock changes during sleep cannot reliably be distinguished from elapsed time using
 two local clocks. **Hardware sleep of a Mac was not tested.** [Validation evidence](docs/QA.md).
+That evidence describes the previous release. Candidate gates and actual BFCache requirements
+are listed in [local candidate acceptance](docs/LOCAL-CANDIDATE-QA.md).
 
 ## Local storage and privacy
 
@@ -142,6 +153,10 @@ and expose Download backup. Browser storage is not a guaranteed backup. A second
 is read-only; transactional owner leases and generation checks prevent competing writers.
 After the old owner closes, **Recover saved event** loads the last committed state explicitly.
 No automatic merging. A suspended owner that loses its lease is fenced from further saves.
+Page return reopens storage and reacquires ownership. Queued edits survive if the saved
+snapshot has not changed; competing writes leave the returning draft available for backup
+before explicit recovery. Connection and persisted lease epochs fence retired operations.
+See [recovery and durability](docs/RECOVERY.md).
 
 Participant data is never uploaded. There are no analytics, remote fonts, account endpoints,
 remote project assets or service worker. All fixtures and demo aliases are original synthetic

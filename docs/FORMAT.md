@@ -29,6 +29,13 @@ at/after the selected order. Draft schema limits are 360 attendance and 72 group
 The accepted plan and pending draft remain distinct. History stores full before/after future
 states, including availability and group definitions, rather than only a visual diff.
 
+The v1 format is unchanged in 0.1.1-rc.1. Hard-invalid but structurally valid projects can
+still be imported for repair and JSON backup. Operational readiness validates the accepted
+plan independently with pendingDraft excluded; pending edits remain unapplied. Hard-invalid
+accepted routes cannot be exported/printed/projected as working assignments. Explicit false
+availability alone means Not attending. Start additionally requires applying or cancelling
+the draft. See [compatibility](MIGRATION-0.1.1.md).
+
 CSV requires exactly `participant_id,public_label` and `round,group,participant_id` headers.
 Round is an integer starting at 1. Group is its stable ID and initial public label. Preview
 explicitly supplies min/max/duration; nonlisted participant/round combinations mean absent.
