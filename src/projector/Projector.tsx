@@ -23,22 +23,40 @@ export function Projector() {
         window.removeEventListener("resize", resize);
       };
     }
-    const channel = new BroadcastChannel(channelName(sessionId));
     const receiver = new ProjectionReceiver(sessionId);
-    channel.onmessage = (e) => {
-      if (receiver.accept(e.data)) {
-        setPayload(receiver.payload);
-        setLastUpdate(receiver.lastAcceptedAt);
-      }
+    let channel: BroadcastChannel | null = null;
+    let request: ReturnType<typeof setInterval> | undefined;
+    const disconnect = () => {
+      clearInterval(request);
+      channel?.close();
+      channel = null;
     };
-    const requestSnapshot = () =>
-      channel.postMessage({ version: 2, type: "request-snapshot", sessionId });
-    requestSnapshot();
-    const request = setInterval(requestSnapshot, 3000);
+    const connect = () => {
+      disconnect();
+      channel = new BroadcastChannel(channelName(sessionId));
+      channel.onmessage = (e) => {
+        if (receiver.accept(e.data)) {
+          setPayload(receiver.payload);
+          setLastUpdate(receiver.lastAcceptedAt);
+        }
+      };
+      const requestSnapshot = () =>
+        channel?.postMessage({
+          version: 2,
+          type: "request-snapshot",
+          sessionId,
+        });
+      requestSnapshot();
+      request = setInterval(requestSnapshot, 3000);
+    };
+    connect();
+    window.addEventListener("pagehide", disconnect);
+    window.addEventListener("pageshow", connect);
     return () => {
       clearInterval(tick);
-      clearInterval(request);
-      channel.close();
+      disconnect();
+      window.removeEventListener("pagehide", disconnect);
+      window.removeEventListener("pageshow", connect);
       window.removeEventListener("resize", resize);
     };
   }, [sessionId]);

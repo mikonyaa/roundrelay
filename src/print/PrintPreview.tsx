@@ -1,5 +1,6 @@
 import { ordered, type EventProject } from "../model/schema";
 import { operationalReadiness } from "../conductor/readiness";
+import { APP_VERSION } from "../model/version";
 export function PrintPreview({
   project: p,
   onClose,
@@ -34,7 +35,7 @@ export function PrintPreview({
       <header className="print-title">
         <h1>{p.title}</h1>
         <p>
-          Plan version {p.revision} · RoundRelay v0.1.0 · {p.eventId}
+          Plan version {p.revision} · RoundRelay v{APP_VERSION} · {p.eventId}
         </p>
         <p>
           Future routes below. Completed rounds are historical scheduled

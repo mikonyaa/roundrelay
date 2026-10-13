@@ -1,4 +1,5 @@
 import type { EventProject } from "./schema";
+import { APP_VERSION } from "./version";
 const aliases = [
   "Aster",
   "Birch",
@@ -97,7 +98,7 @@ export function sampleProject(
     repairHistory: [],
     metadata: {
       createdAt: "2026-10-12T00:00:00Z",
-      appVersion: "0.1.0",
+      appVersion: APP_VERSION,
       source: "Original synthetic RoundRelay sample",
     },
   };

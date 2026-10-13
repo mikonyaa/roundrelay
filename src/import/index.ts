@@ -1,4 +1,5 @@
 import Papa from "papaparse";
+import { APP_VERSION } from "../model/version";
 import { requireOperationalRoutes } from "../conductor/readiness";
 import {
   LIMITS,
@@ -151,7 +152,7 @@ export function importCSV(
     repairHistory: [],
     metadata: {
       createdAt: new Date().toISOString(),
-      appVersion: "0.1.0",
+      appVersion: APP_VERSION,
       source: "RoundRelay CSV pair",
     },
   };

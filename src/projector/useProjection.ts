@@ -7,7 +7,13 @@ const CURSOR_KEY = "roundrelay-projection-v2";
 function publisherForTab() {
   let saved: unknown = null;
   try {
-    saved = JSON.parse(sessionStorage.getItem(CURSOR_KEY) ?? "null");
+    // New tabs can inherit a copy of sessionStorage from their opener. Only a reload or
+    // history return continues this tab's stream; fresh document navigation gets its own.
+    const navigation = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined;
+    if (navigation?.type === "reload" || navigation?.type === "back_forward")
+      saved = JSON.parse(sessionStorage.getItem(CURSOR_KEY) ?? "null");
   } catch {
     /* Session storage may be disabled. */
   }

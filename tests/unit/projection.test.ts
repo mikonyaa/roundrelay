@@ -57,6 +57,9 @@ describe("public transport order independent of business revision", () => {
       { ...good, workspaceEpoch: -1 },
       { ...good, sessionId: crypto.randomUUID() },
       { ...good, privateNote: "PRIVATE_LIFECYCLE_CANARY" },
+      { ...good, payload: { ...good.payload, sentAt: -1 } },
+      { ...good, payload: { ...good.payload, status: "running", timer: null } },
+      { ...good, payload: { ...good.payload, status: "unavailable" } },
       {
         ...good,
         payload: { ...good.payload, privateNote: "PRIVATE_LIFECYCLE_CANARY" },

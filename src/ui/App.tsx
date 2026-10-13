@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { checksum, clone, ordered, type Draft } from "../model/schema";
 import { sampleProject } from "../model/sample";
+import { APP_VERSION } from "../model/version";
 import { undoReason, protectionFingerprint } from "../history";
 import { DEFAULT_OPTIONS, patchMatches, type Proposal } from "../planner";
 import { clockAmbiguity, formatTime, remaining } from "../timer";
@@ -272,7 +273,7 @@ export function App() {
           <span className="brand-mark">
             r<span>r</span>
           </span>
-          RoundRelay<span className="version">0.1.0</span>
+          RoundRelay<span className="version">{APP_VERSION}</span>
         </a>
         <div className="save-state" role="status">
           <span

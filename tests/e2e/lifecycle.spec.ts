@@ -36,6 +36,94 @@ async function openProjector(page: Page) {
   return projector;
 }
 
+test("a copied sessionStorage cursor does not join a different conductor tab's stream", async ({
+  page,
+  context,
+}) => {
+  await importPlan(page, lifecycleProject());
+  const originalProjector = await openProjector(page);
+  const oldSession = new URL(originalProjector.url()).hash.split("session=")[1];
+  const copied = await page.evaluate(() =>
+    sessionStorage.getItem("roundrelay-projection-v2"),
+  );
+  const second = await context.newPage();
+  await second.addInitScript((cursor) => {
+    if (cursor) sessionStorage.setItem("roundrelay-projection-v2", cursor);
+  }, copied);
+  await second.goto("/");
+  await expect(
+    second.getByText("Read-only conductor.", { exact: true }),
+  ).toBeVisible();
+  await page.close();
+  await second.waitForTimeout(5500);
+  await second
+    .getByRole("button", { name: "Recover saved event", exact: true })
+    .click();
+  await expect(
+    second.getByText("Saved locally", { exact: true }),
+  ).toBeVisible();
+  const newProjector = await openProjector(second);
+  expect(new URL(newProjector.url()).hash.split("session=")[1]).not.toBe(
+    oldSession,
+  );
+});
+
+test("projector suspends its channel and requests a fresh snapshot on pageshow", async ({
+  page,
+  context,
+}) => {
+  await context.addInitScript(() => {
+    const state = window as unknown as {
+      rrChannels: Set<{ closed: boolean }>;
+    };
+    // WebKit can run popup init scripts in both the blank and target document.
+    // Count native channel identities even if the instrumentation is wrapped twice.
+    state.rrChannels = new Set();
+    const Original = BroadcastChannel;
+    window.BroadcastChannel = class extends Original {
+      closed = false;
+      constructor(name: string) {
+        super(name);
+        state.rrChannels.add(this);
+      }
+      close() {
+        this.closed = true;
+        super.close();
+      }
+    };
+  });
+  await importPlan(page, lifecycleProject());
+  const projector = await openProjector(page);
+  await projector.evaluate(() =>
+    dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true })),
+  );
+  expect(
+    await projector.evaluate(
+      () =>
+        [
+          ...(window as unknown as { rrChannels: Set<{ closed: boolean }> })
+            .rrChannels,
+        ].filter((c) => !c.closed).length,
+    ),
+  ).toBe(0);
+  await page
+    .getByRole("button", { name: "Start round 1", exact: true })
+    .click();
+  await projector.evaluate(() =>
+    dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true })),
+  );
+  await expect(projector.getByRole("status")).toContainText("plan version 21");
+  expect(
+    await projector.evaluate(
+      () =>
+        [
+          ...(window as unknown as { rrChannels: Set<{ closed: boolean }> })
+            .rrChannels,
+        ].filter((c) => !c.closed).length,
+    ),
+  ).toBe(1);
+});
+
 for (const fault of ["group", "participant"] as const) {
   test(`RR-2: invalid ${fault} stays backed up and repair unlocks routes`, async ({
     page,
@@ -63,9 +151,9 @@ for (const fault of ["group", "participant"] as const) {
       page.waitForEvent("popup"),
       page.getByRole("button", { name: "Open projector" }).click(),
     ]);
-    await expect(
-      projector.locator(".projector-header p"),
-    ).toContainText("Routes unavailable");
+    await expect(projector.locator(".projector-header p")).toContainText(
+      "Routes unavailable",
+    );
     await expect(projector.locator(".projector-groups li")).toHaveCount(0);
     await page.getByText("Edit future group bounds").click();
     await page.getByLabel("East maximum").fill("3");

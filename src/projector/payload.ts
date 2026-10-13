@@ -1,31 +1,55 @@
 import { z } from "zod";
 import { timerSchema, type EventProject } from "../model/schema";
 import { operationalReadiness } from "../conductor/readiness";
-export const publicPayloadSchema = z.strictObject({
-  version: z.literal(1),
-  type: z.literal("snapshot"),
-  revision: z.number().int().nonnegative(),
-  sentAt: z.number(),
-  publicTitle: z.string().max(120),
-  roundLabel: z.string().max(180),
-  status: z.enum([
-    "planned",
-    "running",
-    "paused",
-    "completed",
-    "finished",
-    "unavailable",
-  ]),
-  timer: timerSchema.nullable(),
-  groups: z
-    .array(
-      z.strictObject({
-        publicLabel: z.string().max(120),
-        participants: z.array(z.string().max(120)).max(60),
-      }),
+export const publicPayloadSchema = z
+  .strictObject({
+    version: z.literal(1),
+    type: z.literal("snapshot"),
+    revision: z.number().int().nonnegative(),
+    sentAt: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
+    publicTitle: z.string().min(1).max(120),
+    roundLabel: z.string().min(1).max(180),
+    status: z.enum([
+      "planned",
+      "running",
+      "paused",
+      "completed",
+      "finished",
+      "unavailable",
+    ]),
+    timer: timerSchema.nullable(),
+    groups: z
+      .array(
+        z.strictObject({
+          publicLabel: z.string().min(1).max(120),
+          participants: z.array(z.string().min(1).max(120)).max(60),
+        }),
+      )
+      .max(12),
+  })
+  .superRefine((payload, context) => {
+    const invalid = (message: string) =>
+      context.addIssue({ code: "custom", message });
+    if (
+      payload.groups.reduce(
+        (count, group) => count + group.participants.length,
+        0,
+      ) > 60
     )
-    .max(12),
-});
+      invalid("Too many public assignments");
+    if (payload.status === "unavailable") {
+      if (payload.timer || payload.groups.length)
+        invalid("Unavailable routes cannot carry a timer or assignments");
+    } else if (payload.status === "planned") {
+      if (payload.timer) invalid("Planned projection cannot carry a timer");
+    } else if (
+      !payload.timer ||
+      (payload.status === "running") !==
+        (payload.timer.deadlineEpochMs !== null)
+    ) {
+      invalid("Projection status and timer disagree");
+    }
+  });
 export type PublicPayload = z.infer<typeof publicPayloadSchema>;
 export const channelName = (sessionId: string): string =>
   `roundrelay-public-v2-${sessionId}`;

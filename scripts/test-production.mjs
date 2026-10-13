@@ -6,6 +6,7 @@ import { spawn, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import assert from "node:assert/strict";
 import { consumerRehearsal } from "./browser-flows.mjs";
+import { lifecycleConsumer } from "./lifecycle-consumer.mjs";
 const version = JSON.parse(await readFile("package.json", "utf8")).version;
 const zip =
   process.env.ROUNDRELAY_ZIP ??
@@ -41,6 +42,11 @@ const url = await new Promise((resolve, reject) => {
 const browser = await chromium.launch();
 try {
   const result = await consumerRehearsal(browser, url);
+  const lifecycle = await lifecycleConsumer(
+    browser,
+    url,
+    path.join(consumer, "rehearsal-fixtures"),
+  );
   for (const route of [
     "/%2e%2e/package.json",
     "/..%2fLICENSE",
@@ -62,6 +68,7 @@ try {
     JSON.stringify(
       {
         ...result,
+        lifecycle,
         artifact: path.basename(zip),
         buildInfo: JSON.parse(
           await readFile(path.join(consumer, "build-info.json"), "utf8"),

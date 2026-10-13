@@ -5,7 +5,7 @@ import {
   projectSchema,
   type EventProject,
 } from "../model/schema";
-import { ProjectStorage, StorageConflict } from "../storage";
+import { ProjectStorage, StorageConflict, type StorageFence } from "../storage";
 
 export type WorkshopState = {
   project: EventProject | null;
@@ -202,7 +202,18 @@ export class WorkshopController {
       });
       return;
     }
-    const fence = this.storage.fence;
+    let fence: StorageFence;
+    try {
+      fence = this.storage.fence;
+    } catch (error) {
+      this.failed = true;
+      this.update({
+        readOnly: true,
+        recoveryNeeded: true,
+        saveStatus: `Unsaved · ${error instanceof Error ? error.message : "Storage error"} · download a backup`,
+      });
+      return;
+    }
     this.update({ saveStatus: "Saving…" });
     this.queue = this.queue.then(async () => {
       if (epoch !== this.epoch || this.suspended || this.failed) return;
