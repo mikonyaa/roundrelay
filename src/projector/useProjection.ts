@@ -43,13 +43,18 @@ export function useProjection(
         send();
     };
     const heartbeat = setInterval(send, 1000);
-    send();
-    return () => {
+    const disconnect = () => {
       clearInterval(heartbeat);
       bc.close();
-      channel.current = null;
+      if (channel.current === bc) channel.current = null;
     };
-  }, [publisher, readOnly]);
+    window.addEventListener("pagehide", disconnect);
+    send();
+    return () => {
+      window.removeEventListener("pagehide", disconnect);
+      disconnect();
+    };
+  }, [publisher, readOnly, workspace]);
   useEffect(() => {
     if (project && !readOnly)
       channel.current?.postMessage(publisher.snapshot(project, workspace));

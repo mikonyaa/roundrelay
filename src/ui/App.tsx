@@ -347,10 +347,16 @@ export function App() {
                 </button>
               </nav>
             </div>
-            {readOnly && (
+            {(readOnly || workshop.recoveryNeeded) && (
               <div className="notice">
-                <strong>Read-only conductor.</strong> Another tab owns this
-                workspace. Close it before recovering here.{" "}
+                <strong>
+                  {readOnly
+                    ? "Read-only conductor."
+                    : "Local storage needs recovery."}
+                </strong>{" "}
+                Download a backup of unsaved changes before loading the saved
+                event. If another conductor is active, close it before
+                recovering here.{" "}
                 <button onClick={() => void workshop.recover()}>
                   Recover saved event
                 </button>
