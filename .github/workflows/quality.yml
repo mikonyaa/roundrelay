@@ -36,7 +36,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
           path: |
-            artifacts/roundrelay-0.1.0-web.zip
+            artifacts/roundrelay-*-web.zip
             artifacts/consumer-test.json
             artifacts/suspension-test.json
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
